@@ -69,7 +69,7 @@ export default handler()
     const { hello } = req.body
     //      ^ string
 
-    if (isError) throw new Error('FORBIDDEN', 'Only admin function')
+    if (isError) throw new HTTPError('FORBIDDEN', 'Only admin function')
     res.send('Hello') // type checking
 
     res.send(3) // Error (not a string)
