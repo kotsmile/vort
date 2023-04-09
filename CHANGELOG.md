@@ -1,5 +1,11 @@
 # vort
 
+## 0.0.5
+
+### Patch Changes
+
+- Move zod to deps
+
 ## 0.0.4
 
 ### Patch Changes
