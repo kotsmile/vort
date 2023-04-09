@@ -120,7 +120,7 @@ export class HandlerRoute<
       const parsedRequest = this.checkRequest(request)
       await this.func(parsedRequest, this.injectResponseParser(response))
     } catch (e: any) {
-      // console.error(e)
+      console.error(e)
       if ('message' in e && 'numberCode' in e)
         return response.status(e.numberCode).send(e.message)
       return response.status(httpError.BAD_REQUEST).send('Bad request')
