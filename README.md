@@ -1,5 +1,7 @@
 # Vort backend framework
 
+Flexible full type-safe backend framework based on express
+
 ## Get start
 
 ```bash

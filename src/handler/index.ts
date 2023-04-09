@@ -2,10 +2,11 @@ import type { Request, Response, NextFunction } from 'express'
 import type * as core from 'express-serve-static-core'
 import type { z } from 'zod'
 
-import { HTTPError, VortError } from '@/utils'
+import { VortError } from '@/utils'
 import { httpError } from './consts'
 
 export * from './consts'
+export * from './utils'
 
 export type MiddlewareFunction = (
   request: Request,
@@ -56,14 +57,17 @@ export class HandlerRoute<
     return this as any
   }
 
-  use<M_ extends Record<string, any> = {}>(
+  use<M_ extends Record<string, any> = {}>({
+    middleware,
+    locals,
+  }: {
     middleware: (
       request: Request<P, O, B, Q>,
       response: Response<O, M & M_>,
       next: NextFunction
-    ) => any | Promise<any>,
+    ) => any | Promise<any>
     locals?: z.Schema<M_>
-  ): HandlerRoute<P, Q, B, O, M & M_> {
+  }): HandlerRoute<P, Q, B, O, M & M_> {
     this.middlewares.push({
       func: middleware as any,
       schema: locals,
