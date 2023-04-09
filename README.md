@@ -77,3 +77,41 @@ export default handler()
     res.send(3) // Error (not a string)
   })
 ```
+
+## Middlewares
+
+To define middleware use `defineMiddleware` function
+
+```typescript
+import { defineMiddleware } from 'vort'
+import { z } from 'zod'
+
+const isAdmin = defineMiddleware({
+  locals: z.object({
+    isAdmin: z.boolean(),
+  }),
+  middleware(req, res, next) {
+    const { userId } = req.query
+    res.locals.isAdmin = userId === '1'
+    //          ^ boolean
+    next()
+  },
+})
+```
+
+Now `isAdmin` can be used in handler definition
+
+```typescript
+import { handler, HTTPError } from 'vort'
+import { isAdmin } from '@/middlewares'
+
+export default handler()
+  .use(isAdmin)
+  .query(z.object({ userId: z.string }))
+  .callback((req, res) => {
+    if (!res.locals.isAdmin) {
+      //              ^ boolean
+      throw new HTTPError('FORBIDDEN', 'User is not admin')
+    }
+  })
+```

@@ -1,5 +1,12 @@
 # vort
 
+## 0.0.8
+
+### Patch Changes
+
+- Add middleware support
+- 159f156: Add middleware definition
+
 ## 0.0.7
 
 ### Patch Changes

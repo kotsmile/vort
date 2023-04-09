@@ -1,3 +1,4 @@
+import type { HandlerRoute } from '..'
 import type { HTTPMethod, PartType } from './consts'
 
 export type PathPart = {
@@ -9,7 +10,7 @@ export type Handler = {
   path: PathPart[]
   httpMethod: HTTPMethod
   routeExpress: string
-  handlerFunc: (...args: any) => any | Promise<any>
+  handlerRoute: HandlerRoute
 }
 
 export type PathArray = string[]

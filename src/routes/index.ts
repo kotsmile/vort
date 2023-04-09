@@ -1,14 +1,15 @@
 import fsNode from 'fs'
 import pathNode from 'path'
 
-import type { Express } from 'express'
+import type { Express, Request, Response, NextFunction } from 'express'
 
 import { isHTTPMethod, isdir } from './utils'
 import type { Handler, PathArray, PathPart } from './types'
 import type { HTTPMethod, PartType } from './consts'
 
 import type { VortConfig } from '@/types'
-import type { HandlerRoute } from '@/handler'
+import type { HandlerRoute, MiddlewareFunction } from '@/handler'
+import type { z } from 'zod'
 
 export * from './consts'
 export * from './types'
@@ -85,7 +86,7 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
 
     handlers.push({
       httpMethod,
-      handlerFunc: handlerRoute.execute.bind(handlerRoute),
+      handlerRoute,
       path: clearPath,
       routeExpress: convertToExpressRoute(clearPath),
     })
@@ -97,7 +98,19 @@ export function buildRoutes(config: VortConfig, app: Express) {
   const paths = buildPaths(config.routes)
   const handlers = buildHandlers(paths, config)
   for (const handler of handlers) {
-    app[handler.httpMethod](handler.routeExpress, handler.handlerFunc)
+    const m = handler.handlerRoute.middlewares.map(({ func, schema }) => {
+      return async (req: Request, res: Response, next: NextFunction) => {
+        await func(req, res, (args: any) => {
+          if (schema) schema.parse(res.locals)
+          next(args)
+        })
+      }
+    })
+    app[handler.httpMethod](
+      handler.routeExpress,
+      ...m,
+      handler.handlerRoute.execute.bind(handler.handlerRoute)
+    )
   }
   return handlers
 }
