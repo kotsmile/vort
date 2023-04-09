@@ -1,5 +1,11 @@
 # vort
 
+## 0.0.7
+
+### Patch Changes
+
+- Move express types to deps
+
 ## 0.0.6
 
 ### Patch Changes
