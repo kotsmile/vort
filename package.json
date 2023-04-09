@@ -1,6 +1,6 @@
 {
   "name": "vort",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "kotsmile",
   "license": "MIT",
   "main": "./lib/index.js",
