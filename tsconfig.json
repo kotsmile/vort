@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2015", "es5", "dom"],
+    "moduleResolution": "node",
+
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+
+    "strictPropertyInitialization": true,
+
+    "declaration": true,
+    "declarationMap": true,
+
+    "isolatedModules": true,
+    "preserveValueImports": false,
+    "importsNotUsedAsValues": "error"
+  }
+}
