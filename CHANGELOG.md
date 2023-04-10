@@ -1,5 +1,12 @@
 # vort
 
+## 0.0.9
+
+### Patch Changes
+
+- f2e3a6c: Add methods handlers with subfolder
+- f2e3a6c: Add swagger doc hosting
+
 ## 0.0.8
 
 ### Patch Changes
