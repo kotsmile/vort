@@ -10,8 +10,9 @@
     "./lib/**/*"
   ],
   "scripts": {
+    "dev": "rm -rf ./dist && tsc && tsc-alias && node ./dist/example-backend/index.js",
     "type": "tsc --noEmit",
-    "build": "rm -rf ./lib && tsc && tsc-alias"
+    "build": "rm -rf ./lib && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
   },
   "keywords": [
     "express",

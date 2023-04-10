@@ -35,12 +35,16 @@ Vort has file base system routing
 Folder structure
 
 ```text
-routes/
-    - hello/
-        - world.get.ts
-    - user/
-        - [user]/
-            - create.post.ts
+routes
+  - hello/
+    - world.get.ts
+  - here
+    - another
+      - get.ts
+      - post.ts
+  - user/
+    - [user]/
+      - create.post.ts
 ```
 
 with such folder structure, will generate express routings:
@@ -48,6 +52,9 @@ with such folder structure, will generate express routings:
 ```text
 GET /hello/world
 POST /user/:user/create
+
+GET /here/another
+POST /here/another
 ```
 
 ## Typings
