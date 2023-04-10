@@ -29,6 +29,8 @@ export class HandlerRoute<
 
   middlewares: { func: MiddlewareFunction; schema?: z.Schema }[] = []
 
+  desc: string = ''
+
   func:
     | ((
         request: Request<P, O, B, Q>,
@@ -129,6 +131,11 @@ export class HandlerRoute<
         return response.status(e.numberCode).send(e.message)
       return response.status(httpError.BAD_REQUEST).send('Bad request')
     }
+  }
+
+  description(desc: string) {
+    this.desc = desc
+    return this
   }
 }
 

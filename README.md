@@ -52,7 +52,6 @@ with such folder structure, will generate express routings:
 ```text
 GET /hello/world
 POST /user/:user/create
-
 GET /here/another
 POST /here/another
 ```

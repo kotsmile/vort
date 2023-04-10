@@ -6,6 +6,8 @@ const app = new Vort({
   routes: path.join(__dirname, './routes'),
 })
 
-app.listen(3000, () => {
-  console.log('Listen on', 3000, 'port')
-})
+app
+  .description('Example backend for vort framework, backend')
+  .listen(3000, () => {
+    console.log('Listen on', 3000, 'port')
+  })

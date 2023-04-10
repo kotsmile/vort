@@ -10,6 +10,7 @@ import type { Handler } from '@/routes/types'
 export class Vort {
   appExpress: Express
   handlers: Handler[]
+  desc: string = ''
 
   constructor(public config: VortConfig) {
     this.appExpress = express()
@@ -24,6 +25,11 @@ export class Vort {
 
   use(...handlers: core.RequestHandler[]) {
     this.appExpress.use(...handlers)
+    return this
+  }
+
+  description(desc: string) {
+    this.desc = desc
     return this
   }
 }
