@@ -2,7 +2,14 @@
 
 Flexible full type-safe backend framework based on express
 
-## Get start
+## TODO
+
+- [ ] HEADERS typings
+- [ ] response body `zod` checking
+- [ ] tests
+- [ ] OpenAPI params (query, path, body)
+
+## Get started
 
 ```bash
 yarn add vort
@@ -61,15 +68,15 @@ POST /here/another
 To use define handler use `handler` function
 
 ```typescript
-import { handler, HTTPError } from 'vort'
+import { defineHandler, HTTPError } from 'vort'
 import { z } from 'zod'
 
-export default handler()
+export default defineHandler()
   .query(z.object({ name: z.string() })) // type safe query parameters
   .params(z.object({ user: z.string() })) // type safe path parameters
   .body(z.object({ hello: z.string() })) // type safe body parameters
   .output(z.string())
-  .callback(async (req, res) => {
+  .handler(async (req, res) => {
     const { name } = req.query
     //      ^ string
     const { user } = req.params
@@ -92,17 +99,18 @@ To define middleware use `defineMiddleware` function
 import { defineMiddleware } from 'vort'
 import { z } from 'zod'
 
-const isAdmin = defineMiddleware({
-  locals: z.object({
-    isAdmin: z.boolean(),
-  }),
-  middleware(req, res, next) {
+const isAdmin = defineMiddleware()
+  .locals(
+    z.object({
+      isAdmin: z.boolean(),
+    })
+  )
+  .middleware((req, res, next) => {
     const { userId } = req.query
     res.locals.isAdmin = userId === '1'
     //          ^ boolean
     next()
-  },
-})
+  })
 ```
 
 Now `isAdmin` can be used in handler definition
