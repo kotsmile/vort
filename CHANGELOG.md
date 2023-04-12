@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.0
+
+### Minor Changes
+
+- Type safe middleware creation
+
 ## 0.0.9
 
 ### Patch Changes
