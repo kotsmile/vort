@@ -1,4 +1,5 @@
 export * from '@/handler'
+export * from '@/middleware'
 export * from '@/routes'
 export * from '@/types'
 export * from '@/utils'

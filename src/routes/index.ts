@@ -98,17 +98,17 @@ export function buildRoutes(config: VortConfig, app: Express) {
   const paths = buildPaths(config.routes)
   const handlers = buildHandlers(paths, config)
   for (const handler of handlers) {
-    const m = handler.handlerRoute.middlewares.map(({ func, schema }) => {
-      return async (req: Request, res: Response, next: NextFunction) => {
-        await func(req, res, (args: any) => {
-          if (schema) schema.parse(res.locals)
-          next(args)
-        })
-      }
-    })
+    // const m = handler.handlerRoute.middlewares.map(({ func, schema }) => {
+    //   return async (req: Request, res: Response, next: NextFunction) => {
+    //     await func(req, res, (args: any) => {
+    //       if (schema) schema.parse(res.locals)
+    //       next(args)
+    //     })
+    //   }
+    // })
     app[handler.httpMethod](
       handler.routeExpress,
-      ...m,
+      ...handler.handlerRoute.middlewares.map((m) => m.execute),
       handler.handlerRoute.execute.bind(handler.handlerRoute)
     )
   }

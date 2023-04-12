@@ -1,9 +1,9 @@
-import { handler } from 'vort'
+import { defineHandler } from 'vort'
 import { z } from 'zod'
 
-export default handler()
+export default defineHandler()
   .description('Let to all worlds')
   .output(z.string())
-  .callback((_, res) => {
+  .handler((_, res) => {
     res.send('hello')
   })

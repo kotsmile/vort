@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express'
-import type * as core from 'express-serve-static-core'
 import type { z } from 'zod'
 
+import type { Params, Query, Body, ResponseBody, Locals } from '@/types'
 import { VortError } from '@/utils'
 import { httpError } from './consts'
+import type { Middleware } from '@/middleware'
 
 export * from './consts'
-export * from './utils'
 
 export type MiddlewareFunction = (
   request: Request,
@@ -15,11 +15,11 @@ export type MiddlewareFunction = (
 ) => any | Promise<any>
 
 export class HandlerRoute<
-  P extends core.ParamsDictionary = core.ParamsDictionary,
-  Q extends core.Query = core.Query,
-  B = {},
-  O = {},
-  M extends Record<string, any> = {}
+  P extends Params = Params,
+  Q extends Query = Query,
+  B = Body,
+  O = ResponseBody,
+  L extends Locals = Locals
 > {
   paramsSchema: z.Schema<P> | undefined = undefined
   querySchema: z.Schema<Q> | undefined = undefined
@@ -27,7 +27,7 @@ export class HandlerRoute<
 
   outputSchema: z.Schema<O> | undefined = undefined
 
-  middlewares: { func: MiddlewareFunction; schema?: z.Schema }[] = []
+  middlewares: Middleware<P, Q, B, L>[] = []
 
   desc: string = ''
 
@@ -38,51 +38,39 @@ export class HandlerRoute<
       ) => any | Promise<any>)
     | undefined = undefined
 
-  params<P_ extends core.ParamsDictionary = P>(
-    p: z.Schema<P_>
-  ): HandlerRoute<P_, Q, B, O, M> {
+  params<P_ extends Params = P>(p: z.Schema<P_>): HandlerRoute<P_, Q, B, O, L> {
     this.paramsSchema = p as any
     return this as any
   }
-  query<Q_ extends core.Query = Q>(
-    q: z.Schema<Q_>
-  ): HandlerRoute<P, Q_, B, O, M> {
+  query<Q_ extends Query = Q>(q: z.Schema<Q_>): HandlerRoute<P, Q_, B, O, L> {
     this.querySchema = q as any
     return this as any
   }
-  body<B_ = B>(b: z.Schema<B_>): HandlerRoute<P, Q, B_, O, M> {
+  body<B_ = B>(b: z.Schema<B_>): HandlerRoute<P, Q, B_, O, L> {
     this.bodySchema = b as any
     return this as any
   }
-  output<O_ = O>(o: z.Schema<O_>): HandlerRoute<P, Q, B, O_, M> {
+  output<O_ = O>(o: z.Schema<O_>): HandlerRoute<P, Q, B, O_, L> {
     this.outputSchema = o as any
     return this as any
   }
 
-  use<M_ extends Record<string, any> = {}>({
-    middleware,
-    locals,
-  }: {
-    middleware: (
-      request: Request<P, O, B, Q>,
-      response: Response<O, M & M_>,
-      next: NextFunction
-    ) => any | Promise<any>
-    locals?: z.Schema<M_>
-  }): HandlerRoute<P, Q, B, O, M & M_> {
-    this.middlewares.push({
-      func: middleware as any,
-      schema: locals,
-    })
-    return this as HandlerRoute<P, Q, B, O, M & M_>
+  use<
+    P_ extends Params = Params,
+    Q_ extends Query = Query,
+    B_ = any,
+    L_ extends Locals = {}
+  >(middleware: Middleware<P_, Q_, B_, L_>): HandlerRoute<P, Q, B, O, L & L_> {
+    this.middlewares.push(middleware as any)
+    return this as HandlerRoute<P, Q, B, O, L & L_>
   }
 
-  callback(
+  handler(
     func: (
       request: Request<P, O, B, Q>,
-      response: Response<O, M>
+      response: Response<O, L>
     ) => any | Promise<any>
-  ): HandlerRoute<P, Q, B, O, M> {
+  ): HandlerRoute<P, Q, B, O, L> {
     this.func = func as any
     return this
   }
@@ -103,7 +91,8 @@ export class HandlerRoute<
     return request as Request<P, O, B, Q>
   }
 
-  injectResponseParser(response: Response): Response<O, M> {
+  // TODO
+  injectResponseParser(response: Response): Response<O, L> {
     // const send = response.send
     // response.send = (body: O) => {
     //   try {
@@ -116,7 +105,7 @@ export class HandlerRoute<
     //     throw new VortError('Response body parsing error')
     //   }
     // }
-    return response as Response<O, M>
+    return response as Response<O, L>
   }
 
   async execute(request: Request, response: Response) {
@@ -139,6 +128,6 @@ export class HandlerRoute<
   }
 }
 
-export function handler() {
+export function defineHandler() {
   return new HandlerRoute()
 }
