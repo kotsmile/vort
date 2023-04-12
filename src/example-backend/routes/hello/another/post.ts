@@ -10,7 +10,7 @@ const onlyAdmin = defineMiddleware()
   .query(z.object({ name: z.string() }))
   .middleware((req, res, next) => {
     const { name } = req.query
-    res.locals.isAdmin = 1
+    res.locals.isAdmin = true
     if (name !== 'admin') throw new HTTPError('FORBIDDEN', 'Not a admin')
     next()
   })

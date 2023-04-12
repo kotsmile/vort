@@ -47,7 +47,7 @@ export class Middleware<
   middleware(
     func: (
       request: Request<P, {}, B, Q>,
-      response: Response,
+      response: Response<{}, L>,
       next: NextFunction
     ) => any | Promise<any>
   ) {
