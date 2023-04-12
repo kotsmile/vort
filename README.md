@@ -116,10 +116,10 @@ const isAdmin = defineMiddleware()
 Now `isAdmin` can be used in handler definition
 
 ```typescript
-import { handler, HTTPError } from 'vort'
+import { defineHandler, HTTPError } from 'vort'
 import { isAdmin } from '@/middlewares'
 
-export default handler()
+export default defineHandler()
   .use(isAdmin)
   .query(z.object({ userId: z.string }))
   .callback((req, res) => {
