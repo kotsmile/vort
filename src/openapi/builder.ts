@@ -19,7 +19,7 @@ export function buildOpenAPI(vortApp: Vort) {
   api.info = {
     version: '1.0.0',
     title: 'Backend Vort',
-    description: vortApp.desc,
+    description: vortApp.description_,
   }
 
   api.paths = {}
@@ -27,7 +27,7 @@ export function buildOpenAPI(vortApp: Vort) {
   for (const handler of vortApp.handlers) {
     api.paths[handler.routeExpress] = {
       [handler.httpMethod]: {
-        description: handler.handlerRoute.desc,
+        description: handler.handlerRoute.description_,
         requestBody: contentJSON(
           zodToJsonSchema(handler.handlerRoute.bodySchema ?? z.any(), 'body')
             .definitions?.body ?? {}
@@ -41,7 +41,7 @@ export function buildOpenAPI(vortApp: Vort) {
                 'response'
               ).definitions?.response ?? {}
             ),
-            description: handler.handlerRoute.desc,
+            description: handler.handlerRoute.description_,
           },
         },
       },

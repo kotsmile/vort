@@ -14,7 +14,8 @@ import swaggerUi from 'swagger-ui-express'
 export class Vort {
   appExpress: Express
   handlers: Handler[]
-  desc: string = ''
+  description_: string = ''
+  title_: string = ''
   openAPI: any = {}
 
   constructor(public config: VortConfig) {
@@ -41,8 +42,12 @@ export class Vort {
     return this
   }
 
-  description(desc: string) {
-    this.desc = desc
+  description(description_: string) {
+    this.description_ = description_
+    return this
+  }
+  title(title_: string) {
+    this.title_ = title_
     return this
   }
 }

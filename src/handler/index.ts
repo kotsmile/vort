@@ -29,7 +29,7 @@ export class HandlerRoute<
 
   middlewares: Middleware<P, Q, B, L>[] = []
 
-  desc: string = ''
+  description_: string = ''
 
   func:
     | ((
@@ -122,8 +122,8 @@ export class HandlerRoute<
     }
   }
 
-  description(desc: string) {
-    this.desc = desc
+  description(description_: string) {
+    this.description_ = description_
     return this
   }
 }
