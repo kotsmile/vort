@@ -12,14 +12,17 @@ function contentJSON(schema: any) {
   }
 }
 
+const OPENAPI_VERSION = '3.0.0'
+
 export function buildOpenAPI(vortApp: Vort) {
   const api: any = {}
 
-  api.openapi = '3.0.0'
+  api.openapi = OPENAPI_VERSION
+
   api.info = {
-    version: '1.0.0',
     title: vortApp.title_,
     description: vortApp.description_,
+    version: vortApp.version_,
   }
 
   api.paths = {}
@@ -28,6 +31,7 @@ export function buildOpenAPI(vortApp: Vort) {
     api.paths[handler.routeExpress] = {
       [handler.httpMethod]: {
         description: handler.handlerRoute.description_,
+
         requestBody: contentJSON(
           zodToJsonSchema(handler.handlerRoute.bodySchema ?? z.any(), 'body')
             .definitions?.body ?? {}
