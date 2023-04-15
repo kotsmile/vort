@@ -18,7 +18,7 @@ export function buildOpenAPI(vortApp: Vort) {
   api.openapi = '3.0.0'
   api.info = {
     version: '1.0.0',
-    title: 'Backend Vort',
+    title: vortApp.title_,
     description: vortApp.description_,
   }
 
