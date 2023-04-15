@@ -4,6 +4,7 @@ import type { httpError } from '@/handler/consts'
 
 export type VortConfig = {
   routes: string
+  swaggerRoute?: string | null
 }
 
 export type HTTPErrorCode = keyof typeof httpError

@@ -24,11 +24,12 @@ export class Vort {
     this.handlers = buildRoutes(config, this.appExpress)
     this.openAPI = buildOpenAPI(this)
 
-    this.appExpress.use(
-      '/swagger',
-      swaggerUi.serve,
-      swaggerUi.setup(this.openAPI)
-    )
+    if (config.swaggerRoute)
+      this.appExpress.use(
+        config.swaggerRoute,
+        swaggerUi.serve,
+        swaggerUi.setup(this.openAPI)
+      )
   }
 
   listen(port: number, callback?: () => void) {
