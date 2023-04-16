@@ -65,10 +65,27 @@ routes
 with such folder structure, will generate express routings:
 
 ```text
-GET /hello/world
-POST /user/:user/create
-GET /here/another
-POST /here/another
+GET     /hello/world
+GET     /here/another
+POST    /here/another
+
+GET     /here/all-methods
+POST    /here/all-methods
+PUT     /here/all-methods
+PATCH   /here/all-methods
+DELETE  /here/all-methods
+HEAD    /here/all-methods
+OPTIONS /here/all-methods
+
+GET     /here/all-methods/with-name
+POST    /here/all-methods/with-name
+PUT     /here/all-methods/with-name
+PATCH   /here/all-methods/with-name
+DELETE  /here/all-methods/with-name
+HEAD    /here/all-methods/with-name
+OPTIONS /here/all-methods/with-name
+
+POST    /user/:user/create
 ```
 
 ## Typings
