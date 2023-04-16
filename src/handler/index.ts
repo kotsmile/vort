@@ -30,6 +30,7 @@ export class HandlerRoute<
   middlewares: Middleware<P, Q, B, L>[] = []
 
   description_: string = ''
+  routeExpress: string = ''
 
   func:
     | ((
@@ -115,6 +116,7 @@ export class HandlerRoute<
       const parsedRequest = this.checkRequest(request)
       await this.func(parsedRequest, this.injectResponseParser(response))
     } catch (e: any) {
+      console.error('route', this.routeExpress)
       console.error(e)
       if ('message' in e && 'numberCode' in e)
         return response.status(e.numberCode).send(e.message)

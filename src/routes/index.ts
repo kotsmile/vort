@@ -84,11 +84,16 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
       })
     }
 
+    let routeExpress = convertToExpressRoute(clearPath)
+    if (routeExpress[routeExpress.length - 1] === '/')
+      routeExpress = routeExpress.slice(0, -1)
+    handlerRoute.routeExpress = routeExpress
+    console.log(`[${httpMethod}] ${routeExpress}`)
     handlers.push({
       httpMethod,
       handlerRoute,
       path: clearPath,
-      routeExpress: convertToExpressRoute(clearPath),
+      routeExpress,
     })
   }
   return handlers
@@ -108,7 +113,7 @@ export function buildRoutes(config: VortConfig, app: Express) {
     // })
     app[handler.httpMethod](
       handler.routeExpress,
-      ...handler.handlerRoute.middlewares.map((m) => m.execute),
+      ...handler.handlerRoute.middlewares.map((m) => m.execute.bind(m)),
       handler.handlerRoute.execute.bind(handler.handlerRoute)
     )
   }

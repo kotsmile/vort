@@ -56,15 +56,23 @@ export class Middleware<
   }
 
   checkRequest(request: Request): Request<P, {}, B, Q> {
-    request.params = this.paramsSchema
-      ? this.paramsSchema.parse(request.params)
-      : ({} as P)
-    request.query = this.querySchema
-      ? this.querySchema.parse(request.query)
-      : ({} as Q)
-    request.body = this.bodySchema
-      ? this.bodySchema.parse(request.body)
-      : ({} as B)
+    request.params = {
+      ...request.params,
+      ...(this.paramsSchema
+        ? this.paramsSchema.parse(request.params)
+        : ({} as P)),
+    }
+
+    request.query = {
+      ...request.query,
+      ...(this.querySchema ? this.querySchema.parse(request.query) : ({} as Q)),
+    }
+
+    request.body = {
+      ...request.body,
+      ...(this.bodySchema ? this.bodySchema.parse(request.body) : ({} as B)),
+    }
+
     return request as Request<P, {}, B, Q>
   }
 

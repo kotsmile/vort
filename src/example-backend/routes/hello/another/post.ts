@@ -2,12 +2,12 @@ import { defineHandler, defineMiddleware, HTTPError } from 'vort'
 import { z } from 'zod'
 
 const onlyAdmin = defineMiddleware()
+  .query(z.object({ name: z.string() }))
   .locals(
     z.object({
       isAdmin: z.boolean(),
     })
   )
-  .query(z.object({ name: z.string() }))
   .middleware((req, res, next) => {
     const { name } = req.query
     res.locals.isAdmin = true
@@ -21,5 +21,5 @@ export default defineHandler()
   .query(z.object({ name: z.string(), hello: z.string() }))
   .output(z.string())
   .handler(async (req, res) => {
-    res.send(req.query.name + 'POST')
+    res.send(req.query.hello + 'POST')
   })

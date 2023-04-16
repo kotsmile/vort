@@ -1,15 +1,13 @@
-import express from 'express'
-import type { Express } from 'express'
+import express, { type Express } from 'express'
 import type * as core from 'express-serve-static-core'
+import swaggerUi from 'swagger-ui-express'
+
+import fsNode from 'fs'
 
 import type { VortConfig } from '@/types'
-
-import { buildRoutes } from '@/routes'
-import type { Handler } from '@/routes/types'
-import { buildOpenAPI } from './openapi/builder'
-
-// import { initialize } from 'express-openapi'
-import swaggerUi from 'swagger-ui-express'
+import { buildRoutes, type Handler } from '@/routes'
+import { buildOpenAPI } from '@/openapi/builder'
+import { z } from 'zod'
 
 export class Vort {
   appExpress: Express
@@ -23,20 +21,32 @@ export class Vort {
 
   constructor(public config: VortConfig) {
     this.appExpress = express()
-
     /// init routes
     this.handlers = buildRoutes(config, this.appExpress)
+  }
+
+  start() {
     this.openAPI = buildOpenAPI(this)
 
-    if (config.swaggerRoute)
+    if (this.config.openApiFile) {
+      console.log('Saving OpenAPI file', this.config.openApiFile, '...')
+
+      fsNode.writeFileSync(
+        this.config.openApiFile,
+        JSON.stringify(this.openAPI)
+      )
+    }
+
+    if (this.config.swaggerRoute)
       this.appExpress.use(
-        config.swaggerRoute,
+        this.config.swaggerRoute,
         swaggerUi.serve,
         swaggerUi.setup(this.openAPI)
       )
   }
 
   listen(port: number, callback?: () => void) {
+    this.start()
     this.appExpress.listen(port, callback)
   }
 

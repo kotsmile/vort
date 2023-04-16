@@ -13,7 +13,7 @@ paths:
           schema:
             type: integer
         - name: offset
-          in: query/path
+          in: query
           schema:
             type: integer
       requestBody:

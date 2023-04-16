@@ -5,6 +5,7 @@ import type { httpError } from '@/handler/consts'
 export type VortConfig = {
   routes: string
   swaggerRoute?: string | null
+  openApiFile?: string
 }
 
 export type HTTPErrorCode = keyof typeof httpError
