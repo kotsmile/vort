@@ -43,7 +43,7 @@ export function _parseMethod(path: PathArray): [HTTPMethod, string] {
   return [method, file.split('.').slice(0, -2).join('.')]
 }
 
-function parsePathParams(part: string): [string, PartType] {
+export function _parsePathParams(part: string): [string, PartType] {
   const pathParamRegExp = /^\[(.*)\]$/
   const pathParamAnyRegExp = /^\[\.\.\.(.*)\]$/
 
@@ -55,7 +55,7 @@ function parsePathParams(part: string): [string, PartType] {
   return [part, 'simple']
 }
 
-function convertToExpressRoute(path: PathPart[]): string {
+export function _convertToExpressRoute(path: PathPart[]): string {
   return `/${path
     .map((p) => {
       if (p.partType === 'multi') return `:${p.name}*`
@@ -76,14 +76,14 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
     path[path.length - 1] = file
     const clearPath: PathPart[] = []
     for (const part of path) {
-      const [name, partType] = parsePathParams(part)
+      const [name, partType] = _parsePathParams(part)
       clearPath.push({
         name,
         partType,
       })
     }
 
-    let routeExpress = convertToExpressRoute(clearPath)
+    let routeExpress = _convertToExpressRoute(clearPath)
     if (routeExpress[routeExpress.length - 1] === '/')
       routeExpress = routeExpress.slice(0, -1)
     handlerRoute.routeExpress = routeExpress
@@ -102,14 +102,6 @@ export function buildRoutes(config: VortConfig, app: Express) {
   const paths = _buildPaths(config.routes)
   const handlers = buildHandlers(paths, config)
   for (const handler of handlers) {
-    // const m = handler.handlerRoute.middlewares.map(({ func, schema }) => {
-    //   return async (req: Request, res: Response, next: NextFunction) => {
-    //     await func(req, res, (args: any) => {
-    //       if (schema) schema.parse(res.locals)
-    //       next(args)
-    //     })
-    //   }
-    // })
     app[handler.httpMethod](
       handler.routeExpress,
       ...handler.handlerRoute.middlewares.map((m) => m.execute.bind(m)),
