@@ -53,6 +53,10 @@ routes
     - another
       - get.ts
       - post.ts
+    - all-methods
+      - all.ts
+    - all-methods
+      - with-name.all.ts
   - user/
     - [user]/
       - create.post.ts
