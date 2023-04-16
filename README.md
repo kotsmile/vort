@@ -7,7 +7,7 @@ Flexible full type-safe backend framework based on express
 - [ ] HEADERS typings
 - [ ] response body `zod` checking
 - [ ] tests
-- [ ] OpenAPI params (query, path, body)
+- [x] OpenAPI params (query, path, body)
 
 ## Get started
 
