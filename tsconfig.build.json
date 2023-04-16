@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["./src/example-backend"],
+  "exclude": ["./src/example-backend", "./src/__tests__"],
   "compilerOptions": {
     "outDir": "./lib",
 

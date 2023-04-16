@@ -1,21 +1,20 @@
 import fsNode from 'fs'
 import pathNode from 'path'
 
-import type { Express, Request, Response, NextFunction } from 'express'
+import type { Express } from 'express'
 
 import { isHTTPMethod, isdir } from './utils'
 import type { Handler, PathArray, PathPart } from './types'
 import type { HTTPMethod, PartType } from './consts'
 
 import type { VortConfig } from '@/types'
-import type { HandlerRoute, MiddlewareFunction } from '@/handler'
-import type { z } from 'zod'
+import type { HandlerRoute } from '@/handler'
 
 export * from './consts'
 export * from './types'
 export * from './utils'
 
-function buildPaths(routesPath: string) {
+export function _buildPaths(routesPath: string) {
   if (!isdir(routesPath)) return []
 
   const paths: PathArray[] = []
@@ -30,7 +29,7 @@ function buildPaths(routesPath: string) {
   return paths
 }
 
-function parseMethod(path: PathArray): [HTTPMethod, string] {
+export function _parseMethod(path: PathArray): [HTTPMethod, string] {
   const file = path[path.length - 1]
   const part = file.split('.')
   const length = part.length
@@ -72,7 +71,7 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
     const handlerRoute = require(pathNode.join(config.routes, path.join('/')))
       .default as HandlerRoute
 
-    const [httpMethod, file] = parseMethod(path)
+    const [httpMethod, file] = _parseMethod(path)
 
     path[path.length - 1] = file
     const clearPath: PathPart[] = []
@@ -100,7 +99,7 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
 }
 
 export function buildRoutes(config: VortConfig, app: Express) {
-  const paths = buildPaths(config.routes)
+  const paths = _buildPaths(config.routes)
   const handlers = buildHandlers(paths, config)
   for (const handler of handlers) {
     // const m = handler.handlerRoute.middlewares.map(({ func, schema }) => {
