@@ -26,7 +26,6 @@
     "strictPropertyInitialization": true,
 
     "isolatedModules": true,
-    "preserveValueImports": false,
-    "importsNotUsedAsValues": "error"
+    "preserveValueImports": false
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "vort",
   "description": "Flexible backend framework",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "kotsmile",
   "license": "MIT",
   "main": "./lib/index.js",

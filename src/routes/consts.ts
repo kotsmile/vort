@@ -11,5 +11,5 @@ export const httpMethods = [
 
 export const partTypes = ['simple', 'param', 'multi'] as const
 
-export type HTTPMethod = typeof httpMethods[number]
-export type PartType = typeof partTypes[number]
+export type HTTPMethod = (typeof httpMethods)[number]
+export type PartType = (typeof partTypes)[number]
