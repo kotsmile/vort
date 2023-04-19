@@ -26,8 +26,12 @@ export function buildOpenAPI(vortApp: Vort) {
 
   api.info = {
     title: vortApp.title_,
+    summery: vortApp.summery_,
     description: vortApp.description_,
     version: vortApp.version_,
+    license: vortApp.license_,
+    contact: vortApp.contact_,
+    termsOfService: vortApp.termsOfService_,
   }
 
   api.paths = {}
