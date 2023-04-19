@@ -27,10 +27,10 @@ export class Vort extends OpenAPIDescription {
 
     if (this.config.openApiFile) {
       // console.log('Saving OpenAPI file', this.config.openApiFile, '...')
-      fsNode.writeFileSync(
-        this.config.openApiFile,
-        JSON.stringify(this.openAPI)
-      )
+      // fsNode.writeFileSync(
+      //   this.config.openApiFile,
+      //   JSON.stringify(this.openAPI)
+      // )
     }
 
     if (this.config.swaggerRoute)
