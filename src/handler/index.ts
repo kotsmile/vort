@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 import type { z } from 'zod'
 
 import type { Params, Query, Body, ResponseBody, Locals } from '@/types'
-import { VortError, isHTTPError } from '@/utils'
+import { HTTPError, VortError, isHTTPError } from '@/utils'
 import { httpError } from './consts'
 import type { Middleware } from '@/middleware'
 
@@ -112,20 +112,21 @@ export class HandlerRoute<
   }
 
   // TODO
-  injectResponseParser(response: Response): Response<O, L> {
-    // const send = response.send
-    // response.send = (body: O) => {
-    //   try {
-    //     send.bind(response)(
-    //       this.outputSchema ? this.outputSchema.parse(body) : body
-    //     )
-    //     return response
-    //   } catch (e) {
-    //     console.error(e)
-    //     throw new VortError('Response body parsing error')
-    //   }
-    // }
-    return response as Response<O, L>
+  injectResponseParser(response: Response) {
+    const binedSend = response.send.bind(response)
+    response.send = (body: O) => {
+      try {
+        console.log({ body })
+        const response = this.outputSchema
+          ? this.outputSchema.parse(body)
+          : body
+        console.log({ response })
+        return binedSend(response)
+      } catch (e) {
+        console.error(e)
+        throw new HTTPError('INTERNAL_SERVER_ERROR', 'Internal error')
+      }
+    }
   }
 
   async execute(request: Request, response: Response) {
@@ -133,7 +134,8 @@ export class HandlerRoute<
 
     try {
       const parsedRequest = this.checkRequest(request)
-      await this.func(parsedRequest, this.injectResponseParser(response))
+      this.injectResponseParser(response)
+      await this.func(parsedRequest, response)
     } catch (e: any) {
       console.error(this.routeExpress)
       console.error(e)

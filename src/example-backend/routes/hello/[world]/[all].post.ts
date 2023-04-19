@@ -9,13 +9,3 @@ export default defineHandler()
   .handler((req, res) => {
     res.send('hello, ' + req.params.world + req.params.all)
   })
-  .example({
-    query: {
-      a: 'best',
-      b: 'nothing',
-    },
-    params: {
-      all: 'all',
-      world: '',
-    },
-  })

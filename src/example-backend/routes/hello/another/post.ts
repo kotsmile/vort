@@ -20,6 +20,7 @@ export default defineHandler()
   .use(onlyAdmin)
   .query(z.object({ name: z.string(), hello: z.string() }))
   .output(z.string())
-  .handler(async (req, res) => {
-    res.send(req.query.hello + 'POST')
+  .handler(async (_, res) => {
+    res.send(1 as any)
+    // res.send(req.query.hello + 'POST')
   })
