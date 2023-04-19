@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.3
+
+### Patch Changes
+
+- Add response body checking with zod schema
+
 ## 0.1.2
 
 ### Patch Changes
