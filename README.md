@@ -4,9 +4,9 @@ Flexible full type-safe backend framework based on express
 
 ## TODO
 
-- [ ] response body `zod` checking
 - [ ] tests
 - [ ] add example requests and responses
+- [x] response body `zod` checking
 - [x] OpenAPI params (query, path, body)
 
 ## Get started
