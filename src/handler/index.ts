@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 import type { z } from 'zod'
 
 import type { Params, Query, Body, ResponseBody, Locals } from '@/types'
-import { VortError } from '@/utils'
+import { VortError, isHTTPError } from '@/utils'
 import { httpError } from './consts'
 import type { Middleware } from '@/middleware'
 
@@ -32,6 +32,15 @@ export class HandlerRoute<
   description_: string = ''
   routeExpress: string = ''
 
+  example_:
+    | {
+        params?: P
+        query?: Q
+        body?: B
+        output?: O
+      }
+    | undefined = undefined
+
   func:
     | ((
         request: Request<P, O, B, Q>,
@@ -54,6 +63,16 @@ export class HandlerRoute<
   output<O_ = O>(o: z.Schema<O_>): HandlerRoute<P, Q, B, O_, L> {
     this.outputSchema = o as any
     return this as any
+  }
+
+  example(e: {
+    params?: P
+    query?: Q
+    body?: B
+    output?: O
+  }): HandlerRoute<P, Q, B, O, L> {
+    this.example_ = e
+    return this
   }
 
   use<
@@ -116,10 +135,9 @@ export class HandlerRoute<
       const parsedRequest = this.checkRequest(request)
       await this.func(parsedRequest, this.injectResponseParser(response))
     } catch (e: any) {
-      console.error('route', this.routeExpress)
+      console.error(this.routeExpress)
       console.error(e)
-      if ('message' in e && 'numberCode' in e)
-        return response.status(e.numberCode).send(e.message)
+      if (isHTTPError(e)) return response.status(e.numberCode).send(e.message)
       return response.status(httpError.BAD_REQUEST).send('Bad request')
     }
   }

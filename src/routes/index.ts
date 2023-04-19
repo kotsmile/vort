@@ -87,7 +87,6 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
     if (routeExpress[routeExpress.length - 1] === '/')
       routeExpress = routeExpress.slice(0, -1)
     handlerRoute.routeExpress = routeExpress
-    console.log(`[${httpMethod}] ${routeExpress}`)
     handlers.push({
       httpMethod,
       handlerRoute,
