@@ -52,10 +52,6 @@ export function buildOpenAPI(vortApp: Vort) {
     api.paths[expressToSwagger(handler.routeExpress)][handler.httpMethod] = {
       description: handler.handlerRoute.description_,
 
-      requestBody: contentJSON(
-        zodToJsonSchema(handler.handlerRoute.bodySchema ?? z.any(), 'body')
-          .definitions?.body ?? {}
-      ),
       parameters: [
         ...Object.entries(querySchema.properties ?? {}).map(([k, v]) => {
           return {
@@ -84,6 +80,15 @@ export function buildOpenAPI(vortApp: Vort) {
           description: handler.handlerRoute.description_,
         },
       },
+    }
+
+    if (handler.handlerRoute.bodySchema) {
+      api.paths[expressToSwagger(handler.routeExpress)][
+        handler.httpMethod
+      ].requestBody = contentJSON(
+        zodToJsonSchema(handler.handlerRoute.bodySchema ?? z.any(), 'body')
+          .definitions?.body ?? {}
+      )
     }
   }
 
