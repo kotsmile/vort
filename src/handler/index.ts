@@ -116,11 +116,9 @@ export class HandlerRoute<
     const binedSend = response.send.bind(response)
     response.send = (body: O) => {
       try {
-        console.log({ body })
         const response = this.outputSchema
           ? this.outputSchema.parse(body)
           : body
-        console.log({ response })
         return binedSend(response)
       } catch (e) {
         console.error(e)

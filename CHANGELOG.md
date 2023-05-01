@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.7
+
+### Patch Changes
+
+- Remove console logs
+
 ## 0.1.6
 
 ### Patch Changes
