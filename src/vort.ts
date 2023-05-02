@@ -11,7 +11,7 @@ import { OpenAPIDescription } from '@/openapi/objects'
 
 export class Vort extends OpenAPIDescription {
   appExpress: Express
-  handlers: Handler[]
+  handlers: Handler[] = []
 
   openAPI: any = {}
 
@@ -19,18 +19,18 @@ export class Vort extends OpenAPIDescription {
     super()
 
     this.appExpress = express()
-    this.handlers = buildRoutes(config, this.appExpress)
   }
 
   start() {
+    this.handlers = buildRoutes(this.config, this.appExpress)
     this.openAPI = buildOpenAPI(this)
 
     if (this.config.openApiFile) {
-      // console.log('Saving OpenAPI file', this.config.openApiFile, '...')
-      // fsNode.writeFileSync(
-      //   this.config.openApiFile,
-      //   JSON.stringify(this.openAPI)
-      // )
+      console.log('Saving OpenAPI file', this.config.openApiFile, '...')
+      fsNode.writeFileSync(
+        this.config.openApiFile,
+        JSON.stringify(this.openAPI)
+      )
     }
 
     if (this.config.swaggerRoute)

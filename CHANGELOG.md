@@ -1,5 +1,23 @@
 # vort
 
+## 0.1.10
+
+### Patch Changes
+
+- Fix bug with middlewares in express app
+
+## 0.1.9
+
+### Patch Changes
+
+- Update
+
+## 0.1.8
+
+### Patch Changes
+
+- Add openapi file saving
+
 ## 0.1.7
 
 ### Patch Changes
