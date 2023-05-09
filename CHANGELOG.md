@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.12
+
+### Patch Changes
+
+- Fix send,json in response
+
 ## 0.1.11
 
 ### Patch Changes

@@ -111,33 +111,37 @@ export class HandlerRoute<
     return request as Request<P, O, B, Q>
   }
 
-  // TODO
   injectResponseParser(response: Response) {
     const binedSend = response.send.bind(response)
     const binedJson = response.json.bind(response)
-    response.send = (body: O) => {
+
+    const customSend = (body: O) => {
       try {
-        const response = this.outputSchema
+        const parsedBody = this.outputSchema
           ? this.outputSchema.parse(body)
           : body
-        return binedSend(response)
+
+        response.send = binedSend
+        response.json = binedJson
+
+        const result = binedSend(parsedBody)
+
+        response.send = customSend
+        response.json = customJson
+
+        return result
       } catch (e) {
         console.error(e)
         throw new HTTPError('INTERNAL_SERVER_ERROR', 'Internal error')
       }
     }
 
-    response.json = (body: O) => {
-      try {
-        const response = this.outputSchema
-          ? this.outputSchema.parse(body)
-          : body
-        return binedJson(response)
-      } catch (e) {
-        console.error(e)
-        throw new HTTPError('INTERNAL_SERVER_ERROR', 'Internal error')
-      }
+    const customJson = function (body: O) {
+      return customSend(body)
     }
+
+    response.send = customSend
+    response.json = customJson
   }
 
   async execute(request: Request, response: Response) {
