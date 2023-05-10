@@ -89,6 +89,30 @@ OPTIONS /here/all-methods/with-name
 POST    /user/:user/create
 ```
 
+You can add `-` before any file name to exclude all handlers below
+
+```text
+routes
+  - hello/
+    - world.get.ts
+  - here
+    - -another
+      - get.ts
+      - post.ts
+    - -all-methods
+      - all.ts
+    - all-methods
+      - with-name.all.ts
+  - user/
+    - [user]/
+      - create.post.ts
+```
+
+```text
+GET     /hello/world
+POST    /user/:user/create
+```
+
 ## Typings
 
 To use define handler use `handler` function

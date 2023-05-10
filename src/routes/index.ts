@@ -73,6 +73,7 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
 
     const [httpMethod, file] = _parseMethod(path)
 
+    let ignore = false
     path[path.length - 1] = file
     const clearPath: PathPart[] = []
     for (const part of path) {
@@ -81,7 +82,9 @@ function buildHandlers(paths: PathArray[], config: VortConfig) {
         name,
         partType,
       })
+      if (name.startsWith('-')) ignore = true
     }
+    if (ignore) continue
 
     let routeExpress = _convertToExpressRoute(clearPath)
     if (routeExpress[routeExpress.length - 1] === '/')

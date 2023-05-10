@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.14
+
+### Patch Changes
+
+- Add ignore path (add `-` before file name)
+
 ## 0.1.13
 
 ### Patch Changes
