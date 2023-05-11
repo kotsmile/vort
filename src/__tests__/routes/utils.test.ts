@@ -1,23 +1,26 @@
 import pathNode from 'path'
 
 import {
-  PathPart,
+  isdir,
+  isHTTPMethod,
   _buildPaths,
   _parseMethod,
   _parsePathParams,
   _convertToExpressRoute,
-  isdir,
-  isHTTPMethod,
+  _buildHandlers,
 } from '@/routes'
+import type { PathPart } from '@/routes/types'
+
+import handlers_ from './handlers.json'
 
 import { expectedPaths, expectedMethods } from './expected'
 
-const TEST_ROUTES_PATH = pathNode.join(__dirname, 'test-routes')
+export const TEST_ROUTES_PATH = pathNode.join(__dirname, 'test-routes')
 
 describe('routes', () => {
   describe('utils', () => {
     it('isdir', () => {
-      expect(isdir(pathNode.join(__dirname, 'test-routes'))).toBeTruthy()
+      expect(isdir(TEST_ROUTES_PATH)).toBeTruthy()
     })
     it('isHTTPMethod', () => {
       expect(isHTTPMethod('all')).toBeTruthy()
@@ -68,6 +71,13 @@ describe('routes', () => {
 
         expect(_routeExpress).toBe(routeExpress)
       }
+    })
+    it('_buildHandlers', () => {
+      const paths = _buildPaths(TEST_ROUTES_PATH)
+      const handlers = _buildHandlers(paths, {
+        routes: TEST_ROUTES_PATH,
+      })
+      expect(JSON.parse(JSON.stringify(handlers))).toStrictEqual(handlers_)
     })
   })
 })

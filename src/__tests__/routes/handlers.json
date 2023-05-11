@@ -1,0 +1,914 @@
+[
+  {
+    "httpMethod": "all",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-all/:with-direct-all"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-all",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct-all",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-all/:with-direct-all"
+  },
+  {
+    "httpMethod": "all",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-all/all"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-all",
+        "partType": "param"
+      },
+      {
+        "name": "all",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-all/all"
+  },
+  {
+    "httpMethod": "delete",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "get",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "head",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "options",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "patch",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "post",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "put",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/:with-direct"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "with-direct",
+        "partType": "param"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/:with-direct"
+  },
+  {
+    "httpMethod": "delete",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/delete"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "delete",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/delete"
+  },
+  {
+    "httpMethod": "get",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/get"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "get",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/get"
+  },
+  {
+    "httpMethod": "head",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/head"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "head",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/head"
+  },
+  {
+    "httpMethod": "options",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/options"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "options",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/options"
+  },
+  {
+    "httpMethod": "patch",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/patch"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "patch",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/patch"
+  },
+  {
+    "httpMethod": "post",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/post"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "post",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/post"
+  },
+  {
+    "httpMethod": "put",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/:with-params/put"
+    },
+    "path": [
+      {
+        "name": "with-params",
+        "partType": "param"
+      },
+      {
+        "name": "put",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/:with-params/put"
+  },
+  {
+    "httpMethod": "delete",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/delete"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "delete",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/delete"
+  },
+  {
+    "httpMethod": "get",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/get"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "get",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/get"
+  },
+  {
+    "httpMethod": "head",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/head"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "head",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/head"
+  },
+  {
+    "httpMethod": "options",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/options"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "options",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/options"
+  },
+  {
+    "httpMethod": "patch",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/patch"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "patch",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/patch"
+  },
+  {
+    "httpMethod": "post",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/post"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "post",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/post"
+  },
+  {
+    "httpMethod": "put",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/put"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "put",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/put"
+  },
+  {
+    "httpMethod": "all",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-all/all"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-all",
+        "partType": "simple"
+      },
+      {
+        "name": "all",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-all/all"
+  },
+  {
+    "httpMethod": "all",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-all/with-direct-all"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-all",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct-all",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-all/with-direct-all"
+  },
+  {
+    "httpMethod": "delete",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  },
+  {
+    "httpMethod": "get",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  },
+  {
+    "httpMethod": "head",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  },
+  {
+    "httpMethod": "options",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  },
+  {
+    "httpMethod": "patch",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  },
+  {
+    "httpMethod": "post",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  },
+  {
+    "httpMethod": "put",
+    "handlerRoute": {
+      "outputSchema": {
+        "_def": {
+          "checks": [],
+          "typeName": "ZodString",
+          "coerce": false
+        }
+      },
+      "middlewares": [],
+      "description_": "",
+      "routeExpress": "/without-params/with-direct"
+    },
+    "path": [
+      {
+        "name": "without-params",
+        "partType": "simple"
+      },
+      {
+        "name": "with-direct",
+        "partType": "simple"
+      },
+      {
+        "name": "",
+        "partType": "simple"
+      }
+    ],
+    "routeExpress": "/without-params/with-direct"
+  }
+]
