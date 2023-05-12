@@ -155,7 +155,7 @@ export class HandlerRoute<
       console.error(this.routeExpress)
       console.error(e)
       if (isHTTPError(e)) return response.status(e.numberCode).send(e.message)
-      return response.status(httpError.BAD_REQUEST).send('Bad request')
+      throw e
     }
   }
 

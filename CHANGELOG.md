@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.15
+
+### Patch Changes
+
+- Remove not library error catching in handlers and middlewares
+
 ## 0.1.14
 
 ### Patch Changes

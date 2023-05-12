@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 import type * as core from 'express-serve-static-core'
 import type { z } from 'zod'
 
-import { VortError } from '@/utils'
+import { VortError, isHTTPError } from '@/utils'
 import { httpError } from '@/handler/consts'
 
 import type { Params, Query, Body, Locals } from '@/types'
@@ -93,9 +93,8 @@ export class Middleware<
       await this.func(request_, response, next_)
     } catch (e: any) {
       console.error(e)
-      if ('message' in e && 'numberCode' in e)
-        return response.status(e.numberCode).send(e.message)
-      return response.status(httpError.BAD_REQUEST).send('Bad request')
+      if (isHTTPError(e)) return response.status(e.numberCode).send(e.message)
+      throw e
     }
   }
 }
