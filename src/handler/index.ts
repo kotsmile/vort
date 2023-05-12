@@ -172,7 +172,11 @@ export class HandlerRoute<
       this.injectResponseParser(response)
 
       if (this.modifier_)
-        await this.modifier_(parsedRequest, response as any, func as any)
+        await this.modifier_(
+          parsedRequest,
+          response as any,
+          () => func(parsedRequest, response) as any
+        )
       else await func(parsedRequest, response)
     } catch (e: any) {
       console.error(this.routeExpress)
