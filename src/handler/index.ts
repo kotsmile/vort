@@ -14,6 +14,18 @@ export type MiddlewareFunction = (
   next: NextFunction
 ) => any | Promise<any>
 
+export type Modifier<
+  P extends Params = Params,
+  Q extends Query = Query,
+  B = Body,
+  O = ResponseBody,
+  L extends Locals = Locals
+> = (
+  request: Request<P, O, B, Q>,
+  response: Response<O, L>,
+  handler: () => Promise<any> | any
+) => Promise<any> | any
+
 export class HandlerRoute<
   P extends Params = Params,
   Q extends Query = Query,
@@ -28,6 +40,7 @@ export class HandlerRoute<
   outputSchema: z.Schema<O> | undefined = undefined
 
   middlewares: Middleware<P, Q, B, L>[] = []
+  modifier_: Modifier<P, Q, B, O, L> | undefined = undefined
 
   description_: string = ''
   routeExpress: string = ''
@@ -144,18 +157,28 @@ export class HandlerRoute<
     response.json = customJson
   }
 
+  modifier(func: Modifier<P, Q, B, O, L>) {
+    this.modifier_ = func
+    return this
+  }
+
   async execute(request: Request, response: Response) {
     if (!this.func) throw new VortError('Callback function is not defined')
+
+    const func = this.func
 
     try {
       const parsedRequest = this.checkRequest(request)
       this.injectResponseParser(response)
-      await this.func(parsedRequest, response)
+
+      if (this.modifier_)
+        await this.modifier_(parsedRequest, response as any, func as any)
+      else await func(parsedRequest, response)
     } catch (e: any) {
       console.error(this.routeExpress)
       console.error(e)
       if (isHTTPError(e)) return response.status(e.numberCode).send(e.message)
-      throw e
+      return response.status(httpError.BAD_REQUEST).send('Bad request')
     }
   }
 

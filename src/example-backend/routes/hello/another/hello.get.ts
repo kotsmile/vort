@@ -3,6 +3,8 @@ import { z } from 'zod'
 
 export default defineHandler()
   .output(z.string())
-  .handler(async (_, res) => {
-    res.send('helo')
+  .modifier(async (_req, _res, _handler) => {})
+  .handler(async (_, _res) => {
+    // res.send('helo')
+    throw new Error('hello')
   })

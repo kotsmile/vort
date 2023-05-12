@@ -94,7 +94,7 @@ export class Middleware<
     } catch (e: any) {
       console.error(e)
       if (isHTTPError(e)) return response.status(e.numberCode).send(e.message)
-      throw e
+      return response.status(httpError.BAD_REQUEST).send('Bad request')
     }
   }
 }

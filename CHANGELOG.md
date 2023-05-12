@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.16
+
+### Patch Changes
+
+- Add modifiers to handlers
+
 ## 0.1.15
 
 ### Patch Changes
