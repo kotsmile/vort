@@ -168,16 +168,43 @@ Now `isAdmin` can be used in handler definition
 
 ```typescript
 import { defineHandler, HTTPError } from 'vort'
+import { z } from 'zod'
+
 import { isAdmin } from '@/middlewares'
 
 export default defineHandler()
   .use(isAdmin)
   .query(z.object({ userId: z.string }))
-  .callback((req, res) => {
+  .handler((req, res) => {
     if (!res.locals.isAdmin) {
       //              ^ boolean
       throw new HTTPError('FORBIDDEN', 'User is not admin')
     }
+  })
+```
+
+## Modifiers
+
+Modifier is function which can execute asyncronise way handler function to achive whole control on result, and helps to proceed errors heppens inside handler function
+
+```typescript
+import { defineHandler, HTTPError } from 'vort'
+import { z } from 'zod'
+
+export default defineHandler()
+  .query(z.object({ page: z.number() }))
+  .output(z.array(z.string()))
+  .modifier(async (_req, res, handler) => {
+    try {
+      await handler()
+    } catch (e) {
+      console.error(e)
+      res.send([])
+    }
+  })
+  .handler(async (req, res) => {
+    if (req.query.page > 100) throw new HTTPError('BAD_REQUEST')
+    return ['some']
   })
 ```
 
