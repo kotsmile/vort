@@ -165,6 +165,8 @@ export class HandlerRoute<
   async execute(request: Request, response: Response) {
     if (!this.func) throw new VortError('Callback function is not defined')
 
+    const binedSend = response.send.bind(response)
+
     const func = this.func
 
     try {
@@ -181,8 +183,16 @@ export class HandlerRoute<
     } catch (e: any) {
       console.error(this.routeExpress)
       console.error(e)
-      if (isHTTPError(e)) return response.status(e.numberCode).send(e.message)
-      return response.status(httpError.BAD_REQUEST).send('Bad request')
+      if (isHTTPError(e)) {
+        response.status(e.numberCode)
+        binedSend(e.message)
+        return
+      }
+
+      response.status(httpError.BAD_REQUEST)
+      binedSend('Bad request')
+
+      return
     }
   }
 

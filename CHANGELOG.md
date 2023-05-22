@@ -1,5 +1,11 @@
 # vort
 
+## 0.1.18
+
+### Patch Changes
+
+- Fix bug with internal errors
+
 ## 0.1.17
 
 ### Patch Changes
