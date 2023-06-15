@@ -1,5 +1,11 @@
 # vort
 
+## 0.2.2
+
+### Patch Changes
+
+- Update ZOD version
+
 ## 0.2.1
 
 ### Patch Changes
