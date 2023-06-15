@@ -21,7 +21,7 @@ export class Vort extends OpenAPIDescription {
     this.appExpress = express()
   }
 
-  start() {
+  prepare() {
     this.handlers = buildRoutes(this.config, this.appExpress)
     this.openAPI = buildOpenAPI(this)
 
@@ -32,18 +32,28 @@ export class Vort extends OpenAPIDescription {
         JSON.stringify(this.openAPI)
       )
     }
-
-    if (this.config.swaggerRoute)
-      this.appExpress.use(
-        this.config.swaggerRoute,
-        swaggerUi.serve,
-        swaggerUi.setup(this.openAPI)
-      )
   }
 
-  listen(port: number, callback?: () => void) {
-    this.start()
-    this.appExpress.listen(port, callback)
+  listen(port_: number, callback?: () => void) {
+    this.prepare()
+
+    if (this.config.swagger) {
+      const { route = '/swagger', port = 3000 } = this.config.swagger
+
+      if (port === port_) {
+        this.appExpress.use(
+          route,
+          swaggerUi.serve,
+          swaggerUi.setup(this.openAPI)
+        )
+      } else {
+        express()
+          .use(route, swaggerUi.serve, swaggerUi.setup(this.openAPI))
+          .listen(port, () => {})
+      }
+    }
+
+    this.appExpress.listen(port_, callback)
   }
 
   use(...handlers: core.RequestHandler[]) {

@@ -5,7 +5,10 @@ import express from 'express'
 
 const app = new Vort({
   routes: path.join(__dirname, './routes'),
-  swaggerRoute: '/swagger',
+  swagger: {
+    route: '/swagger',
+    port: 3001,
+  },
   openApiFile: path.join(__dirname, 'openapi.json'),
 })
 

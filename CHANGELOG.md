@@ -1,5 +1,11 @@
 # vort
 
+## 0.2.0
+
+### Minor Changes
+
+- Add ability to host swagger on another port
+
 ## 0.1.18
 
 ### Patch Changes

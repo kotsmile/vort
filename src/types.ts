@@ -4,7 +4,10 @@ import type { httpError } from '@/handler/consts'
 
 export type VortConfig = {
   routes: string
-  swaggerRoute?: string | null
+  swagger?: {
+    route?: string
+    port?: number
+  }
   openApiFile?: string
 }
 
